@@ -7,7 +7,7 @@
 /public/bundles/
 /public/assets/icones
 /public/assets/images
-/public/assets/upload
+/public/assets/uploads
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
