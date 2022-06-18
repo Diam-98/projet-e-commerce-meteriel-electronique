@@ -20,7 +20,6 @@ class ProductDetailsController extends AbstractController
     #[Route('/produit/details/{slug}', name: 'app_product_details')]
     public function index($slug): Response
     {
-
         $singleProduct = $this->manager->getRepository(Product::class)->findOneBy(['slug' => $slug]);
 
         return $this->render('product_details/index.html.twig', [

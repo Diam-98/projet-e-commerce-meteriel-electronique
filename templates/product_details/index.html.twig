@@ -3,5 +3,36 @@
 {% block title %}Details du produit{% endblock %}
 
 {% block content %}
-
+    <div class="container">
+        <div class="row mt-5 mb-5">
+            <div class="col-sm-5 border border-1">
+                <img src="{{ asset('assets/uploads/'~singleProduct.image) }}" alt="{{ singleProduct.name }}" width="100%">
+            </div>
+            <div class="col-sm-7">
+                <h1>{{ singleProduct.name }}</h1>
+                <hr>
+                <div class="d-flex align-items-center justify-content-between">
+                    <h2>{{ singleProduct.price }}</h2>
+                    {% if singleProduct.isInstok == true %}
+                        <div class="d-flex align-items-center text-success">
+                            <input type="checkbox" checked disabled class="mx-2">
+                            Disponible
+                        </div>
+                    {% else %}
+                        Pas disponible
+                    {% endif %}
+                </div>
+                <hr>
+                <h4>Description</h4>
+                <p>
+                    {{ singleProduct.description | raw }}
+                </p>
+                <hr>
+                <div class="d-flex align-items-center">
+                    <button class="btn btn-primary">-</button> <input type="number" value="1" min="1" style="width: 50px"> <button class="btn btn-primary">+</button>
+                    <a href="#" class="mx-2 btn btn-success">Acheter</a>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

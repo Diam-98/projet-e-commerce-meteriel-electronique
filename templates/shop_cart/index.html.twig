@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Panier{% endblock %}
+
+{% block content %}
+    <div class="container my-5">
+        {% if cart | length > 0 %}
+            <div class="table-responsive">
+                <table class="table table-striped table-sm">
+                    <thead>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col">Produit</th>
+                        <th scope="col">Quantite</th>
+                        <th scope="col">Prix</th>
+                        <th scope="col">Total</th>
+                        <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% set total = null %}
+                    {% for product in cart %}
+                        <tr>
+                            <td><img src="{{ asset('assets/uploads/'~product.product.image) }}" width='85px'></td>
+                            <td>{{ product.product.name }}</td>
+                            <td><a href="{{ path('decrease_to_cart', {'id':product.product.id}) }}" class="btn mx-2 btn-success">-</a> x{{ product.quantity }}<a href="{{ path('increase_to_cart', {'id':product.product.id}) }}" class="btn mx-2 btn-success">+</a></td>
+                            <td>{{ product.product.price }}</td>
+                            <td>{{ product.quantity*product.product.price }}</td>
+                            <td><a href="{{ path('delete_from_cart',{'id':product.product.id}) }}"><strong class="bg-danger rounded-3 p-2">X</strong></a></td>
+                        </tr>
+                        {% set total = total + (product.quantity*product.product.price)  %}
+                    {% endfor %}
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <td class="text-end p-4" colspan="4"><strong>Total : </strong></td>
+                        <td>{{ total }} <small> FCFA</small></td>
+                        <td><a class="btn btn-danger" href="{{ path('empty_cart') }}">Vider</a></td>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <div class="w-100">
+                <a class="btn btn-success border-0 rounded-0 btn-block p-3 w-100" href="{{ path('app_check_out') }}">Valider votre achat</a>
+            </div>
+        {% else %}
+            <p>Pas de commande</p>
+        {% endif %}
+    </div>
+{% endblock %}
