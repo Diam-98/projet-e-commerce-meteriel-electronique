@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Category;
 use App\Entity\Product;
-use App\Repository\CategoryRepository;
+use App\Entity\Publicity;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,11 +28,16 @@ class HomeController extends AbstractController
             ->getRepository(Category::class)->findAll();
         $products = $this->entityManager->getRepository(Product::class)->findAll();
 
+        $publicities = $this->entityManager->getRepository(Publicity::class)->findAll();
+//        dd($publicities);
+
+
 //        dd($categories);
 
         return $this->render('home/index.html.twig', [
             'categories' => $categories,
-            'products' => $products
+            'products' => $products,
+            'publicities' => $publicities
         ]);
     }
 }
